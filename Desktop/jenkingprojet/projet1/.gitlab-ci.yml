@@ -1,0 +1,12 @@
+stages:
+  - build
+  - test
+  - deploy
+
+deploy:
+  stage: deploy
+  script:
+    - scp -r ./dist/* user@serveur:/var/www/html/
+    - ssh user@serveur "sudo systemctl reload nginx"
+  only:
+    - main
